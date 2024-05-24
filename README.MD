@@ -696,19 +696,7 @@ Alternatively, you can run:
 
 Which produces the same graph as that above (given I have used a learning rate of 0.0001 above which is the same as the best CNN prior model in 'PredictPrior'), but also stores the model in x, the validation encoding accuracy of the CNN model used to train the Prior in y, and the test encoding accuracy of the CNN model used to train the prior in z. Again, in 'PredictPrior' I used the presaved best VQVAE model, 'goodmodel4'; again if your best VQVAE model is saved with a different filename and path you just need to use these instead of 'goodmodel4', in the appropriate place in 'PredictPrior'. In the case of the trained prior model saved in 'Priormodel', it did in fact use a learning rate of 0.0001 and had a validation encoding accuracy of roughly 0.65 and test encoding accuracy of roughly 0.62. Here, validation encoding accuracy and test encoding accuracy refer to the accuracy of the trained model used to generate the prior whose inputs are the indexes of each embedding vector for each image produced by the vector quantizer layer of the best VQVAE model on the validation dataset and test dataset respectively.
 
-Then to generate the images, sampled using the prior you run:
 
-    GeneratedImages()
-
-This produces the following five images
-
-![](2022-11-19-17-54-23.png)
-![](2022-11-19-17-55-20.png)
-![](2022-11-19-17-56-01.png)
-![](2022-11-19-17-57-10.png)
-![](2022-11-19-17-57-30.png)
-
-Here you can see that there is some kind of mass forming in the middle of the images, but it does not yet look like a brain nor is it very clear. As I mentioned before I tried various different learning rates for training the prior model all of which had validation and test accuracies (here validation dataset and the test dataset are indexes of each embedding vector for each image produced by the vector quantizer layer of the best VQVAE model on the validation dataset and test dataset respectively) above 0.6, which seems reasonable. In addition, in generating the images, I tried different initializations of the array of encodings ('samplearray' variable in function 'GeneratedImages') which is fed into the CNN model used to train the prior for the first pixel. I tried initializations of all 0, as well as ones but it didnt make any real difference. I am thinking, although I am not sure, that the issues might be size (the number of pixels 256*256) which means, one has make many more predictions (which based on previous pixel predictions) which allow any inaccuracies/performance issues to accumulate.
 
 
 
